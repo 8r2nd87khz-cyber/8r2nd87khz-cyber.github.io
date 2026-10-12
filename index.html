@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="id"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>KampusKu</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);--bg:#f1f5f4;--card:#fff;--ink:#16302f;--mut:#5f7775;--brand:#0f6b66;--acc:#f2b544;--line:#dbe5e3;--ok:#1d8a4e;--bad:#c0392b}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0d1716;--card:#16231f;--ink:#e6f0ee;--mut:#8fa8a5;--line:#263a37;--brand:#17847c}}
+:root[data-theme="dark"]{--bg:#0d1716;--card:#16231f;--ink:#e6f0ee;--mut:#8fa8a5;--line:#263a37;--brand:#17847c}
+html{height:100%;scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;min-height:100%;background:var(--bg);color:var(--ink);font-family:"Plus Jakarta Sans",system-ui,-apple-system,sans-serif;font-size:15px}
+#app{max-width:430px;margin:0 auto;padding-bottom:96px;min-height:100vh}
+button{font:inherit;cursor:pointer;border:0;color:inherit}
+button:focus-visible,select:focus-visible,input:focus-visible,summary:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
+.hd{background:var(--brand);color:#fff;padding:22px 18px 70px;border-radius:0 0 28px 28px}
+.row{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.av{width:44px;height:44px;border-radius:50%;background:var(--acc);color:#16302f;font-weight:800;display:grid;place-items:center;font-size:18px}
+.who{display:flex;gap:12px;align-items:center}.who small{opacity:.8;display:block}.who b{font-size:18px}
+.bell{background:rgba(255,255,255,.18);width:44px;height:44px;border-radius:14px;position:relative;font-size:18px}
+.bell i{position:absolute;top:-4px;right:-4px;background:var(--acc);color:#16302f;font-style:normal;font-size:11px;font-weight:800;border-radius:10px;padding:1px 6px}
+.h2{font-weight:800;font-size:19px;margin:20px 0 10px}
+.tabs{display:flex;gap:8px;overflow-x:auto;padding-bottom:2px}
+.tabs button{background:rgba(255,255,255,.18);color:#fff;border-radius:20px;padding:10px 16px;white-space:nowrap;font-weight:600}
+.tabs button.on{background:#fff;color:var(--brand)}
+.wrap{padding:0 16px;margin-top:-48px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:16px;margin-bottom:14px}
+.id b{font-size:20px;display:block;margin:2px 0}.id small{color:var(--mut)}
+.pill{display:inline-block;background:var(--ok);color:#fff;border-radius:12px;padding:2px 10px;font-size:12px;font-weight:600}
+.banner p{color:var(--mut);margin:6px 0 12px}
+.btn{background:var(--brand);color:#fff;border-radius:12px;padding:11px 16px;font-weight:600}
+.btn.o{background:transparent;color:var(--brand);border:1.5px solid var(--brand)}
+.btn.s{padding:7px 12px;font-size:13px}.btn.ok{background:var(--ok)}
+.btn:disabled{opacity:.6}
+.bar{display:grid;grid-template-columns:1fr 1fr;background:#10201f;color:#fff;border-radius:18px;padding:14px 16px;margin-bottom:6px;gap:8px}
+.bar button{background:none;text-align:left;color:#fff;padding:0}.bar small{opacity:.7;display:block}.bar b{font-size:17px}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px 6px;text-align:center}
+.grid button{background:none;font-size:12.5px;font-weight:600;display:flex;flex-direction:column;align-items:center;gap:6px}
+.grid span{width:56px;height:56px;border-radius:18px;background:var(--card);border:1px solid var(--line);display:grid;place-items:center;font-size:26px}
+.grid button:active span{transform:scale(.94)}
+nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:430px;background:var(--card);border-top:1px solid var(--line);display:grid;grid-template-columns:repeat(4,1fr);padding:8px 6px calc(8px + env(safe-area-inset-bottom,0px))}
+nav button{background:none;color:var(--mut);font-size:12px;font-weight:600;padding:6px;border-radius:12px;display:flex;flex-direction:column;align-items:center;gap:2px}
+nav button span{font-size:20px}nav button.on{color:var(--brand);background:color-mix(in srgb,var(--brand) 12%,transparent)}
+.pg{padding:22px 16px}.pg h1{margin:0 0 14px;font-size:22px}
+.item{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:12px 0;border-bottom:1px solid var(--line)}
+.item:last-child{border:0}.item small{color:var(--mut);display:block}
+.ov{position:fixed;inset:0;background:rgba(0,0,0,.45);opacity:0;pointer-events:none;transition:opacity .2s}
+.ov.on{opacity:1;pointer-events:auto}
+.sh{position:fixed;bottom:0;left:50%;width:100%;max-width:430px;max-height:86%;overflow:auto;background:var(--card);border-radius:24px 24px 0 0;padding:18px 18px calc(24px + env(safe-area-inset-bottom,0px));transform:translate(-50%,105%);transition:transform .25s}
+.sh.on{transform:translate(-50%,0)}
+.sh h3{margin:0 0 4px;font-size:20px}.x{float:right;background:var(--bg);width:36px;height:36px;border-radius:50%}
+.chips{display:flex;gap:8px;margin:12px 0}.chips button{background:var(--bg);padding:8px 14px;border-radius:16px;font-weight:600}.chips .on{background:var(--brand);color:#fff}
+select,input{font:inherit;width:100%;padding:11px;border-radius:12px;border:1.5px solid var(--line);background:var(--bg);color:var(--ink)}
+select{width:auto}label{display:block;font-weight:600;margin:12px 0 6px}
+.big{font-size:34px;font-weight:800;color:var(--brand)}
+details{border-bottom:1px solid var(--line);padding:12px 0}summary{font-weight:600;cursor:pointer}details p{color:var(--mut);margin:8px 0 0}
+.toast{position:fixed;left:50%;bottom:100px;transform:translateX(-50%);background:#10201f;color:#fff;padding:11px 18px;border-radius:14px;opacity:0;transition:opacity .2s;pointer-events:none;max-width:90%;text-align:center}
+.toast.on{opacity:1}
+.mut{color:var(--mut)}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body>
+<div id="app"></div>
+<nav id="nav"></nav>
+<div class="ov" id="ov" onclick="closeSh()"></div>
+<div class="sh" id="sh" role="dialog" aria-modal="true"></div>
+<div class="toast" id="toast" role="status"></div>
+<script>
+const $=s=>document.querySelector(s);
+const S={name:'Rani Putri',nim:'2201045',saldo:2500000,log:[],paid:{},on:{},tab:0,view:'home',notif:3,abs:null,day:'Sen',grade:{}};
+const rp=n=>'Rp'+n.toLocaleString('id-ID');
+const esc=t=>String(t).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const D={
+jadwal:{Sen:[['08.00','Algoritma','R. 3.2'],['13.00','Basis Data','Lab 1']],Sel:[['10.00','Statistika','R. 2.1']],Rab:[['08.00','Jaringan','Lab 2'],['15.00','Etika Profesi','R. 1.4']],Kam:[['09.00','Basis Data','R. 3.2']],Jum:[['07.30','Olahraga','Lapangan']]},
+mk:[['Algoritma',3],['Basis Data',3],['Statistika',2],['Jaringan',3],['Etika Profesi',2]],
+ukt:[['UKT Semester 5',2400000],['Praktikum Lab',150000],['Kegiatan Mahasiswa',75000]],
+perpus:[['Clean Code','Robert C. Martin'],['Sistem Basis Data','Elmasri'],['Statistika Dasar','Walpole']],
+surat:[['Surat Keterangan Aktif','Selesai 1 hari'],['Transkrip Sementara','Selesai 2 hari'],['Surat Izin Magang','Selesai 3 hari']],
+event:[['Seminar Karier IT','Sabtu, 18 Okt'],['Lomba Futsal Antar Prodi','Sabtu, 25 Okt']],
+bea:[['Beasiswa Prestasi','Syarat IPK 3,50 ke atas'],['Bantuan Studi','Untuk semester 5 ke atas']]
+};
+const T={perpus:['Perpustakaan','Pinjam','Kembalikan','Dipinjam'],surat:['Pengajuan Surat','Ajukan','Batalkan','Diproses'],event:['Event Kampus','Daftar','Batal','Terdaftar'],bea:['Beasiswa','Daftar','Batal','Terdaftar']};
+const M=[['📅','Jadwal','jadwal'],['📝','Nilai','nilai'],['💳','Bayar UKT','ukt'],['📚','Perpus','perpus'],['✅','Absen','absen'],['✉️','Surat','surat'],['🎟️','Event','event'],['🎓','Beasiswa','bea']];
+const TABS=['Kartu Mahasiswa','Kartu Perpus','Kartu Parkir'];
+
+function toast(m){const t=$('#toast');t.textContent=m;t.classList.add('on');clearTimeout(toast.t);toast.t=setTimeout(()=>t.classList.remove('on'),2200)}
+function openSh(h){$('#sh').innerHTML='<button class="x" onclick="closeSh()" aria-label="Tutup">✕</button>'+h;$('#ov').classList.add('on');$('#sh').classList.add('on')}
+function closeSh(){$('#ov').classList.remove('on');$('#sh').classList.remove('on')}
+function go(v){S.view=v;R();scrollTo(0,0)}
+function log(t,a){S.log.unshift([t,a,new Date().toLocaleString('id-ID',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'})])}
+
+function card(){
+ if(S.tab==0)return `<small>Kartu Tanda Mahasiswa</small><b>${esc(S.name)}</b><small>NIM ${esc(S.nim)} · Teknik Informatika</small><br><span class="pill">Aktif</span>`;
+ if(S.tab==1){const n=D.perpus.filter((_,i)=>S.on['perpus'+i]).length;return `<small>Kartu Perpustakaan</small><b>PS-${esc(S.nim)}</b><small>${n} buku sedang dipinjam</small><br><span class="pill">Berlaku</span>`}
+ return `<small>Kartu Parkir</small><b>B 4821 KMP</b><small>Berlaku sampai 31 Des 2026</small><br><span class="pill">Aktif</span>`}
+
+function R(){
+ const v=S.view;let h='';
+ if(v=='home'){
+  h=`<header class="hd"><div class="row"><div class="who"><div class="av">${esc(S.name[0]||'?').toUpperCase()}</div><div><small>Halo,</small><b>${esc(S.name)}</b></div></div><button class="bell" onclick="notif()" aria-label="Notifikasi">🔔${S.notif?`<i>${S.notif}</i>`:''}</button></div>
+  <div class="h2">Kartu Digital</div><div class="tabs">${TABS.map((t,i)=>`<button class="${i==S.tab?'on':''}" onclick="S.tab=${i};R()">${t}</button>`).join('')}</div></header>
+  <div class="wrap"><div class="card id">${card()}</div>
+  <div class="card banner"><b style="font-size:17px">Lengkapi data kamu</b><p>Isi nama dan NIM supaya kartu digital tampil benar.</p><div class="row" style="justify-content:flex-start"><button class="btn" onclick="profilForm()">Lengkapi</button><button class="btn o" onclick="tutor()">Buka tutorial</button></div></div>
+  <div class="bar"><button onclick="topup()"><small>KampusPay</small><b>${rp(S.saldo)}</b></button><button onclick="menu('ukt')"><small>Tagihan</small><b>${D.ukt.filter((_,i)=>!S.paid[i]).length} belum dibayar</b></button></div>
+  <div class="h2">Layanan Digital Kampus</div><div class="grid">${M.map(m=>`<button onclick="menu('${m[2]}')"><span>${m[0]}</span>${m[1]}</button>`).join('')}</div></div>`}
+ if(v=='trx'){h=`<div class="pg"><h1>Transaksi</h1><div class="card">${S.log.length?S.log.map(l=>`<div class="item"><div>${esc(l[0])}<small>${l[2]}</small></div><b>${l[1]}</b></div>`).join(''):'<p class="mut">Belum ada transaksi. Coba top up saldo atau bayar tagihan dari Beranda.</p>'}</div></div>`}
+ if(v=='help'){h=`<div class="pg"><h1>Bantuan</h1><div class="card"><details><summary>Cara top up saldo?</summary><p>Ketuk saldo KampusPay di Beranda, lalu pilih nominal.</p></details><details><summary>Kenapa tagihan tidak bisa dibayar?</summary><p>Saldo kurang. Top up dulu, lalu bayar lagi.</p></details><details><summary>Cara mengubah nama?</summary><p>Ketuk Lengkapi di Beranda atau buka tab Profil.</p></details></div></div>`}
+ if(v=='me'){h=`<div class="pg"><h1>Profil</h1><div class="card"><div class="item"><span>Nama</span><b>${esc(S.name)}</b></div><div class="item"><span>NIM</span><b>${esc(S.nim)}</b></div><div class="item"><span>Absen terakhir</span><b>${S.abs||'-'}</b></div></div><button class="btn" onclick="profilForm()">Ubah data</button> <button class="btn o" onclick="theme()">Ganti tema</button></div>`}
+ $('#app').innerHTML=h;
+ $('#nav').innerHTML=[['home','🏠','Beranda'],['trx','🧾','Transaksi'],['help','💬','Bantuan'],['me','👤','Profil']].map(n=>`<button class="${S.view==n[0]?'on':''}" onclick="go('${n[0]}')"><span>${n[1]}</span>${n[2]}</button>`).join('')}
+
+function theme(){const r=document.documentElement,d=matchMedia('(prefers-color-scheme:dark)').matches;const cur=r.dataset.theme||(d?'dark':'light');r.dataset.theme=cur=='dark'?'light':'dark'}
+function notif(){S.notif=0;R();openSh(`<h3>Pengumuman</h3><div class="item"><div>Pembayaran UKT dibuka<small>Sampai 30 Okt</small></div></div><div class="item"><div>Jadwal UTS terbit<small>Cek menu Jadwal</small></div></div><div class="item"><div>Perpustakaan tutup Minggu<small>Buka lagi Senin 08.00</small></div></div>`)}
+function tutor(){openSh(`<h3>Tutorial</h3><div class="item">1. Isi nama dan NIM lewat tombol Lengkapi.</div><div class="item">2. Pilih kartu di tab bagian atas.</div><div class="item">3. Ketuk menu layanan untuk membuka fitur.</div><div class="item">4. Top up saldo, lalu bayar tagihan.</div>`)}
+function profilForm(){openSh(`<h3>Data kamu</h3><label for="n">Nama</label><input id="n" value="${esc(S.name)}" maxlength="30"><label for="m">NIM</label><input id="m" value="${esc(S.nim)}" maxlength="12" inputmode="numeric"><br><br><button class="btn" onclick="saveP()">Simpan data</button>`)}
+function saveP(){const n=$('#n').value.trim(),m=$('#m').value.trim();if(!n||!m){toast('Nama dan NIM wajib diisi');return}S.name=n;S.nim=m;closeSh();R();toast('Data disimpan')}
+function topup(){openSh(`<h3>Top up KampusPay</h3><p class="mut">Saldo saat ini ${rp(S.saldo)}</p><div class="chips" style="flex-wrap:wrap">${[50000,100000,500000].map(a=>`<button onclick="addS(${a})">+${rp(a)}</button>`).join('')}</div>`)}
+function addS(a){S.saldo+=a;log('Top up saldo','+'+rp(a));closeSh();R();toast('Saldo bertambah '+rp(a))}
+
+function menu(k){
+ if(k=='jadwal'){const days=Object.keys(D.jadwal);return openSh(`<h3>Jadwal Kuliah</h3><div class="chips">${days.map(d=>`<button class="${d==S.day?'on':''}" onclick="S.day='${d}';menu('jadwal')">${d}</button>`).join('')}</div>${D.jadwal[S.day].map(j=>`<div class="item"><div><b>${j[1]}</b><small>${j[2]}</small></div><b>${j[0]}</b></div>`).join('')}`)}
+ if(k=='nilai'){return openSh(`<h3>Kalkulator IPK</h3><p class="mut">Pilih nilai tiap mata kuliah.</p>${D.mk.map((m,i)=>`<div class="item"><div>${m[0]}<small>${m[1]} SKS</small></div><select aria-label="Nilai ${m[0]}" onchange="S.grade[${i}]=this.value;calc()">${['A','B','C','D','E'].map(g=>`<option ${((S.grade[i]||'A')==g)?'selected':''}>${g}</option>`).join('')}</select></div>`).join('')}<p class="mut">IPK semester ini</p><div class="big" id="ipk"></div>`),calc()}
+ if(k=='ukt'){return openSh(`<h3>Bayar Tagihan</h3><p class="mut">Saldo ${rp(S.saldo)}</p>${D.ukt.map((u,i)=>`<div class="item"><div>${u[0]}<small>${rp(u[1])}</small></div>${S.paid[i]?'<span class="pill">Lunas</span>':`<button class="btn s" onclick="pay(${i})">Bayar</button>`}</div>`).join('')}`)}
+ if(k=='absen'){return openSh(`<h3>Absen Kuliah</h3><p class="mut">Kelas berikutnya: Basis Data, Lab 1</p><p class="big">${S.abs?'Hadir '+S.abs:'Belum absen'}</p><button class="btn" onclick="absen()">${S.abs?'Absen lagi':'Absen sekarang'}</button>`)}
+ const t=T[k];if(t){return openSh(`<h3>${t[0]}</h3>${D[k].map((x,i)=>`<div class="item"><div>${x[0]}<small>${x[1]}</small></div>${S.on[k+i]?`<button class="btn s o" onclick="tg('${k}',${i})">${t[2]}</button>`:`<button class="btn s" onclick="tg('${k}',${i})">${t[1]}</button>`}</div>`).join('')}`)}
+}
+function calc(){const g={A:4,B:3,C:2,D:1,E:0};let a=0,b=0;D.mk.forEach((m,i)=>{a+=g[S.grade[i]||'A']*m[1];b+=m[1]});$('#ipk').textContent=(a/b).toFixed(2).replace('.',',')}
+function pay(i){const u=D.ukt[i];if(S.saldo<u[1]){toast('Saldo kurang. Top up dulu.');return}S.saldo-=u[1];S.paid[i]=1;log(u[0],'-'+rp(u[1]));menu('ukt');R();toast(u[0]+' lunas')}
+function absen(){S.abs=new Date().toLocaleTimeString('id-ID',{hour:'2-digit',minute:'2-digit'});menu('absen');toast('Absen tercatat')}
+function tg(k,i){S.on[k+i]=!S.on[k+i];menu(k);R();toast(S.on[k+i]?T[k][3]+': '+D[k][i][0]:'Dibatalkan')}
+R();
+</script></body></html>
